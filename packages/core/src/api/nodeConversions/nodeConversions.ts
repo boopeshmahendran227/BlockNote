@@ -149,7 +149,7 @@ export function blockToNode<BSchema extends BlockSchema>(
   let contentNode: Node;
 
   if (!block.content) {
-    contentNode = schema.nodes[type].create(block.props);
+    contentNode = schema.nodes[type].createAndFill(block.props) as Node;
   } else if (typeof block.content === "string") {
     contentNode = schema.nodes[type].create(
       block.props,

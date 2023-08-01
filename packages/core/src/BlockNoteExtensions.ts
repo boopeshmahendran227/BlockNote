@@ -40,6 +40,7 @@ import { TextColorMark } from "./extensions/TextColor/TextColorMark";
 import { TrailingNode } from "./extensions/TrailingNode/TrailingNodeExtension";
 import UniqueID from "./extensions/UniqueID/UniqueID";
 import { SuggestionsMenuFactory } from "./shared/plugins/suggestion/SuggestionsMenuFactoryTypes";
+import { Question, Option } from ".";
 
 export type UiFactories<BSchema extends BlockSchema> = Partial<{
   formattingToolbarFactory: FormattingToolbarFactory<BSchema>;
@@ -73,6 +74,8 @@ export const getBlockNoteExtensions = <BSchema extends BlockSchema>(opts: {
     extensions.FocusEvents,
     extensions.Tabindex,
 
+    Question,
+    Option,
     // DevTools,
     Gapcursor,
 
@@ -81,6 +84,16 @@ export const getBlockNoteExtensions = <BSchema extends BlockSchema>(opts: {
       emptyNodeClass: blockStyles.isEmpty,
       hasAnchorClass: blockStyles.hasAnchor,
       isFilterClass: blockStyles.isFilter,
+      placeholder: ({node}) => {
+        debugger;
+        if (node.type.name === "question") {
+          return "What is the question?";
+        }
+        if (node.type.name === "option") {
+          return "What is the option?";
+        }
+        return "Type / to see available command";
+      },
       includeChildren: true,
       showOnlyCurrent: false,
     }),

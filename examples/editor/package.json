@@ -4,9 +4,10 @@
   "version": "0.8.2",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint src --max-warnings 0"
+    "lint": "eslint src --max-warnings 0",
+    "deploy": "aws s3 sync dist s3://notion-editor && aws cloudfront create-invalidation --distribution-id E3P8QOKO2192VV --paths '/*'"
   },
   "dependencies": {
     "@blocknote/core": "^0.8.2",

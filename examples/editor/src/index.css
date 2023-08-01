@@ -3,3 +3,44 @@ body,
 #root {
   height: 100%;
 }
+
+
+.ProseMirror [data-type="mcq"] {
+  position: relative;
+  margin: 10px;
+  border: 2px solid black;
+  background: #fff18d;
+  padding: 15px;
+  padding-top: 0px;
+  padding-bottom: 3px;
+  border-radius: 10px;
+}
+
+.ProseMirror [data-type="mcq"]::before {
+  content: "MCQ";
+  font-weight: 500;
+  font-size: 13px;
+  padding: 5px 10px;
+  background: black;
+  color: white;
+  transform: translateY(-100%);
+  margin-bottom: 8px;
+  pointer-events: none;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+[data-type="question"] {
+  margin-top: 8px;
+}
+
+.ProseMirror [data-type="mcq"]::after {
+  content: "Please enter Cmd + Enter to exit";
+  font-size: 12px;
+  color: #adb5bd;
+}
+
+[data-type="option"] {
+  display: flex;
+}

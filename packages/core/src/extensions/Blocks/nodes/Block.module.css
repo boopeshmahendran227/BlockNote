@@ -272,6 +272,22 @@ NESTED BLOCKS
   content: "Heading";
 }
 
+[data-type="option"].isEmpty::after {
+  color: #adb5bd;
+  content: "Enter your option";
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+[data-type="question"].isEmpty::before {
+  color: #adb5bd;
+  content: "What is the question?";
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
 .blockContent[data-content-type="bulletListItem"].isEmpty .inlineContent:before,
 .blockContent[data-content-type="numberedListItem"].isEmpty
 .inlineContent:before {
