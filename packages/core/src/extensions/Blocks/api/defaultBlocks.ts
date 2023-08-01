@@ -1,4 +1,5 @@
 import { HeadingBlockContent } from "../nodes/BlockContent/HeadingBlockContent/HeadingBlockContent";
+import { ImageBlockContent } from "../nodes/BlockContent/ImageBlockContent/ImageBlockContent";
 import { BulletListItemBlockContent } from "../nodes/BlockContent/ListItemBlockContent/BulletListItemBlockContent/BulletListItemBlockContent";
 import { NumberedListItemBlockContent } from "../nodes/BlockContent/ListItemBlockContent/NumberedListItemBlockContent/NumberedListItemBlockContent";
 import { ParagraphBlockContent } from "../nodes/BlockContent/ParagraphBlockContent/ParagraphBlockContent";
@@ -98,7 +99,7 @@ export const Mcq = createTipTapBlock<"mcq">({
         if (selection.$from.parent.type.name !== 'option' && selection.$from.parent.type.name !== 'question') {
           return false;
         }
-        
+
         return this.editor.chain().joinBackward().focus().run();
       },
       'Mod-Enter': () => {
@@ -138,6 +139,13 @@ export const defaultBlockSchema = {
     },
     node: HeadingBlockContent,
   },
+  image: {
+    propSchema: {
+      ...defaultProps,
+      src: { default: "" }
+    },
+    node: ImageBlockContent,
+  },
   bulletListItem: {
     propSchema: defaultProps,
     node: BulletListItemBlockContent,
@@ -147,7 +155,7 @@ export const defaultBlockSchema = {
     node: NumberedListItemBlockContent,
   },
   mcq: {
-    propSchema:  defaultProps,
+    propSchema: defaultProps,
     node: Mcq,
   }
 } as const;

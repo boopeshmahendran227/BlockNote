@@ -384,3 +384,12 @@ NESTED BLOCKS
 [data-text-alignment="justify"] {
   text-align: justify;
 }
+
+img {
+  width: 100%;
+}
+
+.imageWrapper {
+  display: flex;
+  max-width: 500px;
+}
