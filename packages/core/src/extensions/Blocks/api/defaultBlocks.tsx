@@ -1,5 +1,4 @@
 import { HeadingBlockContent } from "../nodes/BlockContent/HeadingBlockContent/HeadingBlockContent";
-import { ImageBlockContent } from "../nodes/BlockContent/ImageBlockContent/ImageBlockContent";
 import { BulletListItemBlockContent } from "../nodes/BlockContent/ListItemBlockContent/BulletListItemBlockContent/BulletListItemBlockContent";
 import { NumberedListItemBlockContent } from "../nodes/BlockContent/ListItemBlockContent/NumberedListItemBlockContent/NumberedListItemBlockContent";
 import { ParagraphBlockContent } from "../nodes/BlockContent/ParagraphBlockContent/ParagraphBlockContent";
@@ -127,6 +126,7 @@ export const defaultProps = {
 
 export type DefaultProps = typeof defaultProps;
 
+
 export const defaultBlockSchema = {
   paragraph: {
     propSchema: defaultProps,
@@ -138,14 +138,6 @@ export const defaultBlockSchema = {
       level: { default: "1", values: ["1", "2", "3"] as const },
     },
     node: HeadingBlockContent,
-  },
-  image: {
-    propSchema: {
-      ...defaultProps,
-      src: { default: "" },
-      layout: { default: "normal" }
-    },
-    node: ImageBlockContent,
   },
   bulletListItem: {
     propSchema: defaultProps,
@@ -161,7 +153,7 @@ export const defaultBlockSchema = {
   mcq: {
     propSchema: defaultProps,
     node: Mcq,
-  }
+  },
 } as const;
 
 export type DefaultBlockSchema = TypesMatch<typeof defaultBlockSchema>;

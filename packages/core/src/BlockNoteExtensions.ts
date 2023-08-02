@@ -80,23 +80,21 @@ export const getBlockNoteExtensions = <BSchema extends BlockSchema>(opts: {
     Gapcursor,
 
     // DropCursor,
-    Placeholder.configure({
-      emptyNodeClass: blockStyles.isEmpty,
-      hasAnchorClass: blockStyles.hasAnchor,
-      isFilterClass: blockStyles.isFilter,
-      placeholder: ({node}) => {
-        debugger;
-        if (node.type.name === "question") {
-          return "What is the question?";
-        }
-        if (node.type.name === "option") {
-          return "What is the option?";
-        }
-        return "Type / to see available command";
-      },
-      includeChildren: true,
-      showOnlyCurrent: false,
-    }),
+    // Placeholder.configure({
+    //   emptyNodeClass: blockStyles.isEmpty,
+    //   hasAnchorClass: blockStyles.hasAnchor,
+    //   isFilterClass: blockStyles.isFilter,
+    //   placeholder: ({ node }) => {
+    //     if (node.type.name === "question") {
+    //       return "What is the question?";
+    //     }
+    //     if (node.type.name === "option") {
+    //       return "What is the option?";
+    //     }
+    //     return "Type / to see available command";
+    //   },
+    //   showOnlyCurrent: false,
+    // }),
     UniqueID.configure({
       types: ["blockContainer"],
     }),

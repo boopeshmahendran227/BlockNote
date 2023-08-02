@@ -388,16 +388,3 @@ NESTED BLOCKS
 img {
   width: 100%;
 }
-
-.caption {
-  padding: 1em;
-  text-align: center;
-  position: relative
-}
-
-.isEmpty .caption::before {
-  content: "Type caption for image";
-  position: absolute;
-  transform: translateX(-50%);
-  color: #adb5bd;
-}
