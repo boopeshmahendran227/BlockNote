@@ -4,7 +4,7 @@ import { BlockNoteView, ReactSlashMenuItem, defaultReactSlashMenuItems, useBlock
 import { BiSelectMultiple } from "react-icons/bi";
 import { BlockNoteEditor, PartialBlock, defaultBlockSchema } from "@blocknote/core";
 import { Box, Button, Flex } from "@mantine/core";
-import { ImageBlock } from "@blocknote/react"
+import { ImageBlock, VideoBlock } from "@blocknote/react"
 
 
 
@@ -32,6 +32,17 @@ const insertImage = (editor: BlockNoteEditor) => {
   editor.setTextCursorPosition(currentBlock, "start");
 }
 
+const insertVideo = (editor: BlockNoteEditor) => {
+  const currentBlock = editor.getTextCursorPosition().block;
+
+  const imageBlock: PartialBlock = {
+    type: "video",
+  };
+
+  editor.insertBlocks([imageBlock], currentBlock, "after");
+  editor.setTextCursorPosition(currentBlock, "start");
+}
+
 const mcqMenuItem = new ReactSlashMenuItem("Insert MCQ",
   insertMcq,
   [],
@@ -46,6 +57,13 @@ const imageMenuItem = new ReactSlashMenuItem("Insert Image",
   <BiSelectMultiple size={18} />,
 )
 
+const videoMenuItem = new ReactSlashMenuItem("Insert Video",
+  insertVideo,
+  [],
+  "Media",
+  <BiSelectMultiple size={18} />,
+)
+
 function App() {
   const urlParam = new URLSearchParams(window.location.search);
   const isPreview = Boolean(urlParam.get('preview'))
@@ -53,7 +71,7 @@ function App() {
 
   const editor = useBlockNote({
     editable: !isPreview,
-    slashCommands: [...defaultReactSlashMenuItems, mcqMenuItem, imageMenuItem],
+    slashCommands: [...defaultReactSlashMenuItems, mcqMenuItem, imageMenuItem, videoMenuItem],
     onEditorContentChange: (editor: BlockNoteEditor) => {
     },
     editorDOMAttributes: {
@@ -65,7 +83,8 @@ function App() {
     ],
     blockSchema: {
       ...defaultBlockSchema,
-      image: ImageBlock
+      image: ImageBlock,
+      video: VideoBlock
     }
   });
 

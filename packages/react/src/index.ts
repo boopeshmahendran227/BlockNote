@@ -31,3 +31,4 @@ export * from "./SharedComponents/Toolbar/components/Toolbar";
 export * from "./SharedComponents/Toolbar/components/ToolbarButton";
 export * from "./SharedComponents/Toolbar/components/ToolbarDropdown";
 export * from "./ImageBlock";
+export * from "./VideoBlock";
