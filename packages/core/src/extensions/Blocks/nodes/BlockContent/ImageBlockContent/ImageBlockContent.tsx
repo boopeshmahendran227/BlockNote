@@ -1,7 +1,7 @@
 import { NodeView } from "@tiptap/core";
 import { createTipTapBlock } from "../../../api/block";
 import styles from "../../Block.module.css";
-import { NodeViewWrapper, ReactNodeViewRenderer } from "@tiptap/react"
+import { NodeViewWrapper, ReactNodeViewRenderer, NodeViewContent } from "@tiptap/react"
 import { Popover, Tabs, Button, Input, Center, Box, Text } from "@mantine/core";
 import { useState } from "react";
 import { useClickOutside } from "@mantine/hooks";
@@ -24,17 +24,19 @@ const Image = (props: any) => {
     </Box>
   )
 
-  return (
-    <NodeViewWrapper>
-      <div ref={ref} contentEditable={false}>
+  const getChild = () => {
+    if (props.node.attrs.src) {
+      return <div className={styles.imageWrapper}>
+        <img src={props.node.attrs.src} />
+        <NodeViewContent className={styles.caption} >
+        </NodeViewContent>
+      </div>
+    }
+    return (
+      <div contentEditable={false}>
         <Popover opened={modalOpen} disabled={Boolean(props.node.attrs.src)} width={400} shadow="md">
           <Popover.Target>
-            {props.node.attrs.src ?
-              <div className={styles.imageWrapper}>
-                <img src={props.node.attrs.src} />
-              </div>
-              : imagePlaceholder
-            }
+            {imagePlaceholder}
           </Popover.Target>
           <Popover.Dropdown>
             <Tabs defaultValue="upload">
@@ -59,6 +61,14 @@ const Image = (props: any) => {
             </Tabs>
           </Popover.Dropdown>
         </Popover>
+      </div>
+    )
+  }
+
+  return (
+    <NodeViewWrapper>
+      <div ref={ref}>
+        {getChild()}
       </div>
     </NodeViewWrapper>
   )

@@ -151,7 +151,10 @@ export const defaultBlockSchema = {
     node: BulletListItemBlockContent,
   },
   numberedListItem: {
-    propSchema: defaultProps,
+    propSchema: {
+      ...defaultProps,
+      index: { default: null }
+    },
     node: NumberedListItemBlockContent,
   },
   mcq: {

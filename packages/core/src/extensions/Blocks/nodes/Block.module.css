@@ -391,5 +391,18 @@ img {
 
 .imageWrapper {
   display: flex;
+  flex-direction: column;
   max-width: 500px;
+}
+
+.caption {
+  padding: 1em;
+  text-align: center;
+  position: relative
+}
+
+.isEmpty .caption::before {
+  content: "Type caption for image";
+  position: absolute;
+  transform: translateX(-50%);
 }
