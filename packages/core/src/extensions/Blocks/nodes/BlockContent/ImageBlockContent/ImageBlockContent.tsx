@@ -4,9 +4,11 @@ import styles from "../../Block.module.css";
 import { NodeViewWrapper, ReactNodeViewRenderer } from "@tiptap/react"
 import { Popover, Tabs, Button, Input, Center, Box, Text } from "@mantine/core";
 import { useState } from "react";
+import { useClickOutside } from "@mantine/hooks";
 
 const Image = (props: any) => {
   const [value, setValue] = useState("");
+  const [modalOpen, setModalOpen] = useState(true);
 
   const embedImage = () => {
     props.updateAttributes({
@@ -14,16 +16,18 @@ const Image = (props: any) => {
     })
   }
 
+  const ref = useClickOutside(() => setModalOpen(false));
+
   const imagePlaceholder = (
-    <Box color="rgba(55, 53, 47, 0.65)" bg="rgb(242, 241, 238)" p={20} w="100%">
+    <Box onClick={() => setModalOpen(o => !o)} color="rgba(55, 53, 47, 0.65)" bg="rgb(242, 241, 238)" p={20} w="100%">
       <Text>Add an Image</Text>
     </Box>
   )
 
   return (
     <NodeViewWrapper>
-      <div contentEditable={false}>
-        <Popover opened disabled={Boolean(props.node.attrs.src)} width={400} shadow="md">
+      <div ref={ref} contentEditable={false}>
+        <Popover opened={modalOpen} disabled={Boolean(props.node.attrs.src)} width={400} shadow="md">
           <Popover.Target>
             {props.node.attrs.src ?
               <div className={styles.imageWrapper}>
