@@ -389,12 +389,6 @@ img {
   width: 100%;
 }
 
-.imageWrapper {
-  display: flex;
-  flex-direction: column;
-  max-width: 500px;
-}
-
 .caption {
   padding: 1em;
   text-align: center;
@@ -405,4 +399,5 @@ img {
   content: "Type caption for image";
   position: absolute;
   transform: translateX(-50%);
+  color: #adb5bd;
 }

@@ -2,9 +2,10 @@ import { NodeView } from "@tiptap/core";
 import { createTipTapBlock } from "../../../api/block";
 import styles from "../../Block.module.css";
 import { NodeViewWrapper, ReactNodeViewRenderer, NodeViewContent } from "@tiptap/react"
-import { Popover, Tabs, Button, Input, Center, Box, Text } from "@mantine/core";
+import { Popover, Tabs, Button, ActionIcon, Input, Center, Box, Text, Flex } from "@mantine/core";
 import { useState } from "react";
 import { useClickOutside } from "@mantine/hooks";
+import { MdOutlineWidthNormal, MdOutlineWidthWide, MdOutlineWidthFull } from "react-icons/md";
 
 const Image = (props: any) => {
   const [value, setValue] = useState("");
@@ -16,6 +17,12 @@ const Image = (props: any) => {
     })
   }
 
+  const changeLayout = (layout: string) => {
+    props.updateAttributes({
+      layout
+    })
+  }
+
   const ref = useClickOutside(() => setModalOpen(false));
 
   const imagePlaceholder = (
@@ -23,18 +30,45 @@ const Image = (props: any) => {
       <Text>Add an Image</Text>
     </Box>
   )
+  const getMaxWidth = () => {
+    const layout = props.node.attrs.layout;
+    if (layout === 'normal') {
+      return '300px'
+    }
+    if (layout === 'wide') {
+      return '500px'
+    }
+    return '100%';
+  }
 
   const getChild = () => {
     if (props.node.attrs.src) {
-      return <div className={styles.imageWrapper}>
-        <img src={props.node.attrs.src} />
+      return <div className="imageWrapper" style={{ maxWidth: getMaxWidth() }}>
+        <Popover disabled={!props.editor.options.editable} withArrow width={150} shadow="sm">
+          <Popover.Target>
+            <img style={{}} src={props.node.attrs.src} />
+          </Popover.Target>
+          <Popover.Dropdown bg="#262625" color='white'>
+            <Flex justify="space-around" align="center">
+              <ActionIcon variant="transparent" onClick={() => changeLayout("normal")}>
+                <MdOutlineWidthNormal color="white" size={30} />
+              </ActionIcon>
+              <ActionIcon variant="transparent" onClick={() => changeLayout("wide")}>
+                <MdOutlineWidthWide color="white" size={30} />
+              </ActionIcon>
+              <ActionIcon variant="transparent" onClick={() => changeLayout("full")}>
+                <MdOutlineWidthFull color="white" size={30} />
+              </ActionIcon>
+            </Flex>
+          </Popover.Dropdown>
+        </Popover>
         <NodeViewContent className={styles.caption} >
         </NodeViewContent>
       </div>
     }
     return (
       <div contentEditable={false}>
-        <Popover opened={modalOpen} disabled={Boolean(props.node.attrs.src)} width={400} shadow="md">
+        <Popover opened={modalOpen} width={400} shadow="md">
           <Popover.Target>
             {imagePlaceholder}
           </Popover.Target>
@@ -89,6 +123,15 @@ export const ImageBlockContent = createTipTapBlock<"image">({
           };
         },
       },
+      layout: {
+        default: "normal",
+        parseHTML: (element) => element.getAttribute("data-layout"),
+        renderHTML: (attributes) => {
+          return {
+            src: attributes.layout,
+          };
+        },
+      }
     };
   },
 

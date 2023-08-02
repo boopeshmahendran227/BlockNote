@@ -44,3 +44,15 @@ body,
 [data-type="option"] {
   display: flex;
 }
+
+.editor{
+  height: 100%;
+}
+
+
+.imageWrapper {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+}

@@ -142,7 +142,8 @@ export const defaultBlockSchema = {
   image: {
     propSchema: {
       ...defaultProps,
-      src: { default: "" }
+      src: { default: "" },
+      layout: { default: "normal" }
     },
     node: ImageBlockContent,
   },
@@ -153,7 +154,7 @@ export const defaultBlockSchema = {
   numberedListItem: {
     propSchema: {
       ...defaultProps,
-      index: { default: null }
+      index: { default: "" }
     },
     node: NumberedListItemBlockContent,
   },
